@@ -1,0 +1,18 @@
+# netlify.toml
+[build]
+command = "npm run build"
+publish = "dist"
+
+# 关键：解决 Vue 路由刷新 404 问题
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+# 关键：解决后端 API 跨域问题（推荐方案）
+# 前端请求 /api/* 时，Netlify 会自动转发到你的后端
+[[redirects]]
+from = "/api/*"
+to = "https://你的后端域名/api/:splat"
+status = 200
+force = true
